@@ -1,0 +1,7 @@
+FROM node:12
+
+WORKDIR /usr/src/app
+
+EXPOSE 50051
+
+CMD [ "node", "server.js" ]

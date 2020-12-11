@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service UserDatabase {    
+    rpc getUser(Guid) returns (User) {}
+}
+
+message Guid {
+    string guid = 1;
+}
+
+message User {
+    string id = 1;
+    string email = 2;
+    string name = 3;
+    int32 age = 4;
+}

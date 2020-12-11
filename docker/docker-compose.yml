@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      args:
+        user: bisho
+        uid: 1000
+      context: ./
+      dockerfile: /Users/bisho/Dev/test-apps/grpc-test/docker/images/php/DockerFile
+    image: grpc-test-php
+    container_name: grpc-test-php
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - /Users/bisho/Dev/test-apps/grpc-test/php-app:/var/www
+    networks:
+      - test-grpc-network
+
+  node:
+    build:
+      args:
+        user: bisho
+        uid: 1000
+      context: ./../node-app
+      dockerfile: /Users/bisho/Dev/test-apps/grpc-test/docker/images/node/DockerFile
+    image: grpc-test-node
+    container_name: grpc-test-node
+    volumes:
+      - /Users/bisho/Dev/test-apps/grpc-test/node-app:/usr/src/app
+    networks:
+      - test-grpc-network
+
+  nginx:
+    image: nginx:1.19.1-alpine
+    container_name: test-nginx
+    restart: unless-stopped
+    ports:
+      - 3333:3333
+    volumes:
+      - /Users/bisho/Dev/test-apps/grpc-test/php-app:/var/www
+      - ./images/nginx:/etc/nginx/conf.d
+      - ./images/nginx/certs/test-app.local.crt:/etc/nginx/test-app.local.crt
+      - ./images/nginx/certs/test-app.local.key:/etc/nginx/test-app.local.key
+    networks:
+      - test-grpc-network
+
+networks:
+  test-grpc-network:
+    driver: bridge
