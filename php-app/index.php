@@ -1,23 +1,24 @@
 <?php
 
 require 'vendor/autoload.php';
+require './src/GrpcClient.php';
 
-$userDatabaseClient = new UserDatabaseClient('grpc-test-node:50051', [
-    'credentials' => Grpc\ChannelCredentials::createInsecure(),
-]);
+$grpcClient = new GrpcClient();
 
-$guid = new Guid();
-$guid->setGuid('1');
-list($user, $status) = $userDatabaseClient->getUser($guid, [], ['timeout' => 10000])->wait();
+$url = trim($_SERVER['REQUEST_URI'], '/');
 
-if ($status->code !== Grpc\STATUS_OK) {
-    echo "Call did not complete successfully. Status object:\n";
-    var_dump($status);
-    exit(1);
+if ((preg_match('/users\/([0-9]+)/', $url, $matches))) {
+    $userId = $matches[1];
+    $guid = new Guid();
+    $guid->setGuid($userId);
+    try {
+        $user = $grpcClient->getUser($guid);
+        require 'views/show-user.php';
+    } catch (Exception $e) {
+        $message = $e->getMessage();
+        require 'views/error.php';
+    }
+} else {
+    require 'views/home.php';
 }
 
-/**
- * User
- */
-$user;
-print_r($user->getEmail());
