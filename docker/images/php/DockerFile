@@ -29,12 +29,10 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 RUN pecl install grpc
-COPY "./images/php/custom-ini/docker-php-ext-grpc.ini" "$PHP_INI_DIR/conf.d/"
+COPY "./docker/images/php/custom-ini/docker-php-ext-grpc.ini" "$PHP_INI_DIR/conf.d/"
 
 RUN pecl install protobuf
-COPY "./images/php/custom-ini/docker-php-ext-protobuf.ini" "$PHP_INI_DIR/conf.d/"
-
-COPY './images/php/packages/protobuf-3.14.0' '~/Downloads/protobuf-3.14.0'
+COPY "./docker/images/php/custom-ini/docker-php-ext-protobuf.ini" "$PHP_INI_DIR/conf.d/"
 
 WORKDIR /var/www
 

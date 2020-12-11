@@ -6,8 +6,8 @@ services:
       args:
         user: bisho
         uid: 1000
-      context: ./
-      dockerfile: /Users/bisho/Dev/test-apps/grpc-test/docker/images/php/DockerFile
+      context: .
+      dockerfile: ./docker/images/php/DockerFile
     image: grpc-test-php
     container_name: grpc-test-php
     restart: unless-stopped
@@ -22,8 +22,8 @@ services:
       args:
         user: bisho
         uid: 1000
-      context: ./../node-app
-      dockerfile: /Users/bisho/Dev/test-apps/grpc-test/docker/images/node/DockerFile
+      context: .
+      dockerfile: ./docker/images/node/DockerFile
     image: grpc-test-node
     container_name: grpc-test-node
     volumes:
@@ -39,9 +39,7 @@ services:
       - 3333:3333
     volumes:
       - /Users/bisho/Dev/test-apps/grpc-test/php-app:/var/www
-      - ./images/nginx:/etc/nginx/conf.d
-      - ./images/nginx/certs/test-app.local.crt:/etc/nginx/test-app.local.crt
-      - ./images/nginx/certs/test-app.local.key:/etc/nginx/test-app.local.key
+      - ./docker/images/nginx:/etc/nginx/conf.d
     networks:
       - test-grpc-network
 
