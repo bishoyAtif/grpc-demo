@@ -1,0 +1,23 @@
+body {
+  background-color: cornsilk;
+  margin: 5%;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#main-header {
+  font-size: 3em;
+  text-align: center;
+}
+
+p {
+  font-size: 1.25em;
+}
+
+#link {
+  margin-top: 7%;
+}
+
+.container {
+  margin-left: 5%;
+  font-size: 1.75em;
+}

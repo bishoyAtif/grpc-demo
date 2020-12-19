@@ -21,4 +21,3 @@ if ((preg_match('/users\/([0-9]+)/', $url, $matches))) {
 } else {
     require 'views/home.php';
 }
-

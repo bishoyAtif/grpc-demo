@@ -5,7 +5,8 @@
 </head>
 
 <body>
-    <h1>Error: <?= $message ?></h1>
+    <h1>Not Found</h1>
+    Error <?= $message ?>
 </body>
 
 </html>
