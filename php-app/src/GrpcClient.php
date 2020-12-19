@@ -21,7 +21,7 @@ class GrpcClient
         list($user, $status) = $this->client->getUser($userId, [], $this->options)->wait();
 
         if ($status->code !== Grpc\STATUS_OK) {
-            throw new Exception('Call did not complete successfully.');
+            throw new Exception($status->details, $status->code);
         }
 
         return $user;

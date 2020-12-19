@@ -20,7 +20,7 @@ function getUser(call, callback) {
 
   if (!user) {
     error = new Error('User Not Found!')
-    error.code = 404
+    error.code = grpc.status.NOT_FOUND
   } else {
     result = user
   }
