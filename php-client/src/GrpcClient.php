@@ -7,7 +7,7 @@ class GrpcClient
 
     public function __construct()
     {
-        $this->client = new UserDatabaseClient('grpc-test-node:50051', [
+        $this->client = new UserDatabaseClient('grpc-demo-node:50051', [
             'credentials' => Grpc\ChannelCredentials::createInsecure(),
         ]);
     }

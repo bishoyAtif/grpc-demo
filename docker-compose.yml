@@ -8,14 +8,14 @@ services:
         uid: 1000
       context: .
       dockerfile: ./docker/images/php/DockerFile
-    image: grpc-test-php
-    container_name: grpc-test-php
+    image: grpc-demo-php
+    container_name: grpc-demo-php
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
       - ./php-client:/var/www
     networks:
-      - test-grpc-network
+      - grpc-demo-network
 
   node:
     build:
@@ -24,16 +24,16 @@ services:
         uid: 1000
       context: .
       dockerfile: ./docker/images/node/DockerFile
-    image: grpc-test-node
-    container_name: grpc-test-node
+    image: grpc-demo-node
+    container_name: grpc-demo-node
     volumes:
       - ./node-server:/usr/src/app
     networks:
-      - test-grpc-network
+      - grpc-demo-network
 
   nginx:
     image: nginx:1.19.1-alpine
-    container_name: test-nginx
+    container_name: grpc-demo-nginx
     restart: unless-stopped
     ports:
       - 3333:3333
@@ -41,8 +41,8 @@ services:
       - ./php-client:/var/www
       - ./docker/images/nginx:/etc/nginx/conf.d
     networks:
-      - test-grpc-network
+      - grpc-demo-network
 
 networks:
-  test-grpc-network:
+  grpc-demo-network:
     driver: bridge
