@@ -5,10 +5,6 @@ class GrpcClient
 {
     protected $client;
 
-    protected $options = [
-        'timeout' => 10000
-    ];
-
     public function __construct()
     {
         $this->client = new UserDatabaseClient('grpc-test-node:50051', [
@@ -18,7 +14,7 @@ class GrpcClient
 
     public function getUser($userId)
     {
-        list($user, $status) = $this->client->getUser($userId, [], $this->options)->wait();
+        list($user, $status) = $this->client->getUser($userId)->wait();
 
         if ($status->code !== Grpc\STATUS_OK) {
             throw new Exception($status->details, $status->code);
@@ -29,6 +25,5 @@ class GrpcClient
 
     public function listUsers()
     {
-        
     }
 }
