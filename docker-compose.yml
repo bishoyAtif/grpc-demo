@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - /Users/bisho/Dev/test-apps/grpc-test/php-client:/var/www
+      - ./php-client:/var/www
     networks:
       - test-grpc-network
 
@@ -27,7 +27,7 @@ services:
     image: grpc-test-node
     container_name: grpc-test-node
     volumes:
-      - /Users/bisho/Dev/test-apps/grpc-test/node-server:/usr/src/app
+      - ./node-server:/usr/src/app
     networks:
       - test-grpc-network
 
@@ -38,7 +38,7 @@ services:
     ports:
       - 3333:3333
     volumes:
-      - /Users/bisho/Dev/test-apps/grpc-test/php-client:/var/www
+      - ./php-client:/var/www
       - ./docker/images/nginx:/etc/nginx/conf.d
     networks:
       - test-grpc-network
