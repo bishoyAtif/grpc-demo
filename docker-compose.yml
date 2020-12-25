@@ -4,8 +4,8 @@ services:
   php:
     build:
       args:
-        user: bisho
-        uid: 1000
+        user: ${CONTAINER_USER}
+        uid: ${CONTAINER_USER_ID}
       context: .
       dockerfile: ./docker/images/php/DockerFile
     image: grpc-demo-php
@@ -20,8 +20,8 @@ services:
   node:
     build:
       args:
-        user: bisho
-        uid: 1000
+        user: ${CONTAINER_USER}
+        uid: ${CONTAINER_USER_ID}
       context: .
       dockerfile: ./docker/images/node/DockerFile
     image: grpc-demo-node
